@@ -24,7 +24,7 @@ public class MainActivity extends android.app.Activity {
             userId = i + 1;
             VirtualHelper.getInstance().installedAsUser(userId);
             VirtualHelper.getInstance().createShortcut(userId);
-            VirtualHelper.getInstance().launchApp(userId);
         }
+//        VirtualHelper.getInstance().launchApp(userId);
     }
 }
