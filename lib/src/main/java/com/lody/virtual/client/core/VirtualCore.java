@@ -456,6 +456,7 @@ public final class VirtualCore {
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
+        addIntent.putExtra("duplicate", false);
         addIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         context.sendBroadcast(addIntent);
         return true;

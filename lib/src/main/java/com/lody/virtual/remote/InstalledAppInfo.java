@@ -83,4 +83,15 @@ public final class InstalledAppInfo implements Parcelable {
             return new InstalledAppInfo[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "InstalledAppInfo{" +
+                "packageName='" + packageName + '\'' +
+                ", apkPath='" + apkPath + '\'' +
+                ", libPath='" + libPath + '\'' +
+                ", dependSystem=" + dependSystem +
+                ", appId=" + appId +
+                '}';
+    }
 }

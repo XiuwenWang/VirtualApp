@@ -1,4 +1,4 @@
-package com.mengy.wx1.models;
+package com.xiumiing.wxtest;
 
 import android.graphics.drawable.Drawable;
 

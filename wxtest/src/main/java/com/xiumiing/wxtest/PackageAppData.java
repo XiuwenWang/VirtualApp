@@ -15,7 +15,7 @@ public class PackageAppData implements AppData {
     public String packageName;
     public String name;
     public Drawable icon;
-    public boolean fastOpen;
+    public boolean fastOpen = true;
     public boolean isFirstOpen;
     public boolean isLoading;
 

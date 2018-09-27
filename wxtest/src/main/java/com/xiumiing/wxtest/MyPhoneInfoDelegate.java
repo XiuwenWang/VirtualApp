@@ -1,4 +1,4 @@
-package com.mengy.wx1.delegate;
+package com.xiumiing.wxtest;
 
 import com.lody.virtual.client.hook.delegate.PhoneInfoDelegate;
 

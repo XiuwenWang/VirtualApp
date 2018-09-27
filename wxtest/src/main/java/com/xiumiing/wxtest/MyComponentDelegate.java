@@ -1,4 +1,4 @@
-package com.mengy.wx1.delegate;
+package com.xiumiing.wxtest;
 
 import android.app.Activity;
 import android.app.Application;

@@ -168,4 +168,6 @@ public class VUserInfo implements Parcelable {
         profileGroupId = source.readInt();
         guestToRemove = source.readInt() != 0;
     }
+
+
 }

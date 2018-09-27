@@ -1,4 +1,4 @@
-package com.mengy.wx1.delegate;
+package com.xiumiing.wxtest;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;

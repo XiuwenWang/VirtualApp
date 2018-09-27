@@ -38,5 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':lib')
     implementation 'org.jdeferred:jdeferred-android-aar:1.2.4'
+    implementation 'com.jonathanfinerty.once:once:1.2.2'
+    implementation 'com.flurry.android:analytics:6.9.2'
 
 }

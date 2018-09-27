@@ -13,4 +13,18 @@ public class AppInfo {
     public Drawable icon;
     public CharSequence name;
     public int cloneCount;
+    public int userId;
+
+    @Override
+    public String toString() {
+        return "AppInfo{" +
+                "packageName='" + packageName + '\'' +
+                ", path='" + path + '\'' +
+                ", fastOpen=" + fastOpen +
+                ", icon=" + icon +
+                ", name=" + name +
+                ", cloneCount=" + cloneCount +
+                ", userId=" + userId +
+                '}';
+    }
 }
