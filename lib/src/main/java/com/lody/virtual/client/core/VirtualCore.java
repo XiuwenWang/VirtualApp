@@ -467,19 +467,26 @@ public final class VirtualCore {
         if (setting == null) {
             return false;
         }
-        ApplicationInfo appInfo = setting.getApplicationInfo(userId);
-        PackageManager pm = context.getPackageManager();
         String name;
+        Bitmap icon;
+        PackageManager pm = context.getPackageManager();
+        PackageInfo pkg = null;
         try {
-            CharSequence sequence = appInfo.loadLabel(pm);
-            name = sequence.toString();
-        } catch (Throwable e) {
-            return false;
+            pkg = pm.getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
+        ApplicationInfo ai = pkg.applicationInfo;
+        icon = BitmapUtils.drawableToBitmap(ai.loadIcon(pm));;
+        name = ai.loadLabel(pm).toString();
         if (listener != null) {
-            String newName = listener.getName(name);
+            String newName = listener.getName(name + userId);
             if (newName != null) {
                 name = newName;
+            }
+            Bitmap newIcon = listener.getIcon(icon);
+            if (newIcon != null) {
+                icon = newIcon;
             }
         }
         Intent targetIntent = getLaunchIntent(packageName, userId);
@@ -494,11 +501,13 @@ public final class VirtualCore {
         }
         shortcutIntent.putExtra("_VA_|_intent_", targetIntent);
         shortcutIntent.putExtra("_VA_|_uri_", targetIntent.toUri(0));
-        shortcutIntent.putExtra("_VA_|_user_id_", VUserHandle.myUserId());
+        shortcutIntent.putExtra("_VA_|_user_id_", userId);
 
         Intent addIntent = new Intent();
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
+        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
+        addIntent.putExtra("duplicate", false);
         addIntent.setAction("com.android.launcher.action.UNINSTALL_SHORTCUT");
         context.sendBroadcast(addIntent);
         return true;

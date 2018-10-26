@@ -20,7 +20,17 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("com.xiumiing.wxtest", appContext.getPackageName());
+        int num = 0;
+        for (; ; ) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            int pid = android.os.Process.myPid();
+            num++;
+            System.out.println(appContext.getPackageName()+" : "+ + num);
+            System.out.println("pid : " + pid);
+        }
     }
 }

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.RemoteException;
+import android.util.Log;
 
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.client.env.VirtualRuntime;
@@ -34,6 +35,8 @@ import java.util.Map;
 
 import mirror.android.app.ActivityThread;
 import mirror.android.content.ContentProviderNative;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * @author Lody
@@ -69,15 +72,23 @@ public class VActivityManager {
         }
     }
 
+    public static final String TAG = "startActivity";
+
     public int startActivity(Intent intent, int userId) {
+        long time = System.currentTimeMillis();
+        Log.d(TAG, "startActivity: 1:" + (System.currentTimeMillis() - time));
         if (userId < 0) {
             return ActivityManagerCompat.START_NOT_CURRENT_USER_ACTIVITY;
         }
+        Log.d(TAG, "startActivity: 2:" + (System.currentTimeMillis() - time));
         ActivityInfo info = VirtualCore.get().resolveActivityInfo(intent, userId);
+        Log.d(TAG, "startActivity: 3:" + (System.currentTimeMillis() - time));
         if (info == null) {
             return ActivityManagerCompat.START_INTENT_NOT_RESOLVED;
         }
-        return startActivity(intent, info, null, null, null, 0, userId);
+        int i = startActivity(intent, info, null, null, null, 0, userId);
+        Log.d(TAG, "startActivity: 4:" + (System.currentTimeMillis() - time));
+        return i;
     }
 
     public ActivityClientRecord onActivityCreate(ComponentName component, ComponentName caller, IBinder token, ActivityInfo info, Intent intent, String affinity, int taskId, int launchMode, int flags) {
@@ -182,7 +193,7 @@ public class VActivityManager {
 
     public void setServiceForeground(ComponentName className, IBinder token, int id, Notification notification, boolean removeNotification) {
         try {
-            getService().setServiceForeground(className, token, id, notification,removeNotification,  VUserHandle.myUserId());
+            getService().setServiceForeground(className, token, id, notification, removeNotification, VUserHandle.myUserId());
         } catch (RemoteException e) {
             e.printStackTrace();
         }

@@ -114,6 +114,25 @@ public class VirtualHelper {
     }
 
     /**
+     * 创建快捷方式
+     *
+     * @param userId
+     */
+    public void removeShortcut(int userId) {
+        VirtualCore.get().removeShortcut(userId, WE_CHAT_PACKAGE_NAME, null,new VirtualCore.OnEmitShortcutListener() {
+            @Override
+            public Bitmap getIcon(Bitmap originIcon) {
+                return originIcon;
+            }
+
+            @Override
+            public String getName(String originName) {
+                return "微信" + userId;
+            }
+        });
+    }
+
+    /**
      * 用户 userId 是否安装
      *
      * @param appInfo
@@ -138,6 +157,15 @@ public class VirtualHelper {
         launchApp(appInfo);
     }
 
+    /**
+     * 用户 userId 安装
+     *
+     * @param userId 0
+     * @return
+     */
+    public boolean uninstallPackageAsUser(int userId) {
+       return VirtualCore.get().uninstallPackageAsUser(WE_CHAT_PACKAGE_NAME,userId);
+    }
     /**
      * 用户 userId 安装
      *
@@ -179,7 +207,7 @@ public class VirtualHelper {
         Log.d(TAG, "newUserInfo" + newUserInfo.toString());
         //安装包 作为用户
         boolean success = VirtualCore.get().installPackageAsUser(userId, appInfo.packageName);
-        if (success) {
+        if (!success) {
             Log.e(TAG, "installPackageAsUser" + "安装包 作为用户  == false");
             return false;
         }
